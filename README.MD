@@ -1,5 +1,5 @@
 - # Для работы ресурспака необходим мод [CitResewn](https://modrinth.com/mod/cit-resewn/versions)
-- # При установке [мода](https://github.com/qwertied/qwertied_rp_mod) установка ресурспака #*не нужна*#
+- # При установке [мода](https://github.com/qwertied/qwertied_rp_mod) установка ресурспака ***не нужна***
 
 
 ### Как обновить ресурспак или добавить туда что-то:
