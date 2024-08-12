@@ -1,4 +1,4 @@
-# Для работы мода необходим мод [CitResewn](https://modrinth.com/mod/cit-resewn/versions)
+# Для работы ресурспака необходим мод [CitResewn](https://modrinth.com/mod/cit-resewn/versions)
 
 ## Заголовок
 
