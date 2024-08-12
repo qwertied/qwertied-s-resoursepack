@@ -1,0 +1,54 @@
+name: Create release
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - src/pack.mcmeta
+  workflow_dispatch:
+
+env:
+  RP_NAME: FaithCraft-RP
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Get resourcepack version
+        run: |
+          echo "VERSION=$(grep -o '\"version\": "[^"]*"' src/pack.mcmeta | grep -o '[0-9]\+\(\.[0-9]\+\)*')" >> $GITHUB_ENV
+
+      - name: Create ZIP
+        uses: vimtor/action-zip@v1
+        with:
+          files: src/pack.mcmeta src/readme
+          dest: ${{ env.RP_NAME }}-${{ env.VERSION }}.zip
+
+      - name: Create a Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: false
+          automatic_release_tag: ${{ env.VERSION }}
+          title: Release ${{ env.VERSION }}
+          files: |
+            ${{ env.RP_NAME }}-${{ env.VERSION }}.zip
+
+      - name: Rename Archive
+        run: |
+          mv ${{ env.RP_NAME }}-${{ env.VERSION }}.zip ${{ env.RP_NAME }}.zip
+
+      - name: Create a Latest Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: false
+          automatic_release_tag: latest
+          title: ResourcePack
+          files: |
+            ${{ env.RP_NAME }}.zip
